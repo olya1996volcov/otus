@@ -1,8 +1,11 @@
 package ru.otus.spring.domain;
 
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 public class Question {
     private String question;
     private List<Answer> answers;
@@ -12,24 +15,13 @@ public class Question {
         answers = new ArrayList<>();
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
 
     @Override
     public String toString() {
-        return question + "\n" + answersSting();
-    }
-
-    private String answersSting() {
-        StringBuilder str = new StringBuilder();
-        for (Answer a : answers) {
-            str.append(a.toString());
+        StringBuilder sb = new StringBuilder();
+        for (Answer answer : answers) {
+            sb.append(answer.toString());
         }
-        return str.toString();
+        return question + "\n" + sb.toString();
     }
 }

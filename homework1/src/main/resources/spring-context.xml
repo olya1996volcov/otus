@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="reader" class="ru.otus.spring.service.CsvFileReader">
-        <constructor-arg name="file" value="homework1/src/main/resources/file1.csv"/>
+        <constructor-arg name="file" value="file1.csv"/>
     </bean>
 
     <bean id="ioService"
