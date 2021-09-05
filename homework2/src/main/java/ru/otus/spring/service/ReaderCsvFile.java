@@ -7,6 +7,7 @@ import ru.otus.spring.domain.Answer;
 import ru.otus.spring.domain.Question;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class ReaderCsvFile implements Reader {
     public List<Question> readQuestions() {
         List<Question> questions = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            File file = getFileFromResources(fileName);
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
 
             while (line != null) {
@@ -46,5 +49,16 @@ public class ReaderCsvFile implements Reader {
             ioService.print("Error in ReaderCsvFile");
         }
         return questions;
+    }
+    private File getFileFromResources(String fileName) {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file is not found!");
+        } else {
+            return new File(resource.getFile());
+        }
     }
 }
