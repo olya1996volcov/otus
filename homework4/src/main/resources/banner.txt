@@ -1,0 +1,6 @@
+${AnsiColor.RED}  _____ ____
+${AnsiColor.BLUE} |_   _|  _ \
+${AnsiColor.YELLOW}  | | | |_) | __ _ _ __  _ __   ___ _ __
+${AnsiColor.GREEN}  | | |  _ < / _` | '_ \| '_ \ / _ | '__|
+${AnsiColor.MAGENTA} _| |_| |_) | (_| | | | | | | |  __| |
+${AnsiColor.RED} |_____|____/ \__,_|_| |_|_| |_|\___|_|
