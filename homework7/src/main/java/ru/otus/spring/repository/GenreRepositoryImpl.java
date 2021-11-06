@@ -43,8 +43,11 @@ public class GenreRepositoryImpl implements GenreRepository {
                 "select g from Genre g where g.genreName = :name"
                 , Genre.class);
         query.setParameter("name", name);
-
-        return query.getSingleResult();
+        List<Genre> resultList = query.getResultList();
+        if (resultList != null && !resultList.isEmpty()) {
+            return resultList.get(0);
+        }
+        return null;
     }
 
 }

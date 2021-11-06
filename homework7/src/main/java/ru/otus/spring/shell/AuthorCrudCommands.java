@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.spring.domain.Author;
-import ru.otus.spring.repository.AuthorRepository;
 import ru.otus.spring.service.IOService;
 import ru.otus.spring.service.crud.AuthorCrudService;
 

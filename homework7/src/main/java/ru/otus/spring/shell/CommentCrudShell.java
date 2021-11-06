@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.spring.domain.Comment;
-import ru.otus.spring.repository.CommentRepository;
 import ru.otus.spring.service.ObjectFactory;
 import ru.otus.spring.service.crud.CommentCrudService;
 
