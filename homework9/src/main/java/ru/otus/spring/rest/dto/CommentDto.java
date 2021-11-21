@@ -20,9 +20,6 @@ public class CommentDto {
         return new CommentDto(comment.getId(), comment.getText(),  comment.getBook().getId());
     }
 
-//    public static CommentDto toDto(Comment comment, long bookId) {
-//        return new CommentDto(comment.getId(), comment.getText(), comment.getBook(), bookId);
-//    }
 
     public static Comment toDomainObject(CommentDto dto) {
         return new Comment(dto.getId(), dto.getText(), Book.builder().id(dto.getBookId()).build());

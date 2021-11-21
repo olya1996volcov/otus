@@ -3,12 +3,8 @@ package ru.otus.spring.service.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.repository.CommentRepository;
-import ru.otus.spring.service.IOService;
-import ru.otus.spring.service.ObjectFactory;
-import ru.otus.spring.service.StringFormatter;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +14,7 @@ import java.util.Optional;
 public class CommentCrudServiceImpl implements CommentCrudService {
 
     private final CommentRepository commentRepository;
-    private final IOService ioService;
-    private final ObjectFactory objectFactory;
-    private final StringFormatter stringFormatter;
+
 
     @Transactional
     @Override

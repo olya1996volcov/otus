@@ -18,13 +18,10 @@ public class CommentController {
     public void createNewComment(@PathVariable("id") long id, @RequestBody CommentDto dto) {
         Comment comment = CommentDto.toDomainObject(dto);
         commentService.saveByBookId(comment, id);
-       // return CommentDto.toDto(savedComment.getId(), savedComment.getText(), savedComment.getBook().getId());
     }
 
     @GetMapping(value = "/api/book/{id}/comment")
     public List<CommentDto> getAllCommentsByBookId(@PathVariable("id") long id) {
-//        return commentService.showAllCommentsByBookId(id).stream().map(CommentDto::toDto)
-//                .collect(Collectors.toList());
         return commentService.showAllCommentsByBookId(id).stream().map(
                 comment -> CommentDto.toDto(comment.getId(), comment.getText(), comment.getBook().getId()))
                 .collect(Collectors.toList());

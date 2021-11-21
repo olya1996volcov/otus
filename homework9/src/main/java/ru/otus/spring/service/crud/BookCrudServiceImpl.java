@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.repository.BookRepository;
-import ru.otus.spring.service.IOService;
-import ru.otus.spring.service.ObjectFactory;
-import ru.otus.spring.service.StringFormatter;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +14,7 @@ import java.util.Optional;
 public class BookCrudServiceImpl implements BookCrudService {
 
     private final BookRepository bookRepository;
-    private final ObjectFactory objectFactory;
-    private final IOService ioService;
-    private final StringFormatter stringFormatter;
+
 
     @Transactional
     @Override

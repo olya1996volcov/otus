@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.repository.AuthorRepository;
-import ru.otus.spring.rest.dto.AuthorDto;
-import ru.otus.spring.service.IOService;
-import ru.otus.spring.service.StringFormatter;
 
 import java.util.List;
 
@@ -15,9 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorCrudServiceImpl implements AuthorCrudService {
 
-    private final IOService ioService;
     private final AuthorRepository authorRepository;
-    private final StringFormatter stringFormatter;
 
     @Transactional
     @Override
