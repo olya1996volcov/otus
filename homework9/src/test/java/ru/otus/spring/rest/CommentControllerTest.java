@@ -15,6 +15,7 @@ import ru.otus.spring.rest.dto.BookDto;
 import ru.otus.spring.rest.dto.CommentDto;
 import ru.otus.spring.service.crud.BookCrudService;
 import ru.otus.spring.service.crud.CommentCrudService;
+import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class CommentControllerTest {
     void shouldReturnCorrectCommentListByBookId() throws Exception {
         Comment comment = createComment(1L);
         List<CommentDto> expectedResult = List.of(comment).stream()
-                .map(CommentDto::toDto).collect(Collectors.toList());
+                .map(DtoDomainMapper::toDto).collect(Collectors.toList());
 
         mvc.perform(get("/api/book/1/comment", 1).param("id", "1"))
                 .andExpect(status().isOk())
@@ -52,7 +53,7 @@ public class CommentControllerTest {
 
     @Test
     void shouldReturnCorrectCommentById() throws Exception {
-        CommentDto expectedResult = CommentDto.toDto(createComment(1L));
+        CommentDto expectedResult = DtoDomainMapper.toDto(createComment(1L));
 
         mvc.perform(get("/api/comment/1"))
                 .andExpect(status().isOk())
@@ -73,7 +74,7 @@ public class CommentControllerTest {
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldCorrectSaveNewComment() throws Exception {
 
-        String expectedResult = mapper.writeValueAsString(CommentDto.toDto(createComment(2L)));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(createComment(2L)));
 
         mvc.perform(post("/api/book/1/comment").contentType(APPLICATION_JSON)
                 .content(expectedResult))
@@ -85,7 +86,7 @@ public class CommentControllerTest {
     void shouldCorrectUpdateComment() throws Exception {
         Comment comment = createComment(1L);
         comment.setText("newText");
-        String expectedResult = mapper.writeValueAsString(CommentDto.toDto(comment));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(comment));
 
         mvc.perform(put("/api/comment/1/text", 1).param("text", comment.getText())
                 .content(expectedResult))

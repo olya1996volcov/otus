@@ -9,6 +9,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Genre;
 import ru.otus.spring.rest.dto.GenreDto;
+import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class GenreControllerTest {
     void shouldReturnCorrectGenreList() throws Exception {
 
         List<GenreDto> expectedResult = List.of(createGenre(1L)).stream()
-                .map(GenreDto::toDto).collect(Collectors.toList());
+                .map(DtoDomainMapper::toDto).collect(Collectors.toList());
 
         mvc.perform(get("/api/genre"))
                 .andExpect(status().isOk())
@@ -42,7 +43,7 @@ public class GenreControllerTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldCorrectSaveNewGenre() throws Exception {
-        String expectedResult = mapper.writeValueAsString(GenreDto.toDto(createGenre(2L)));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(createGenre(2L)));
         mvc.perform(post("/api/genre").contentType(APPLICATION_JSON)
                 .content(expectedResult))
                 .andExpect(status().isOk())

@@ -1,12 +1,13 @@
 package ru.otus.spring.service.crud;
 
 import ru.otus.spring.domain.Genre;
+import ru.otus.spring.rest.dto.GenreDto;
 
 import java.util.List;
 
 public interface GenreCrudService {
 
-    Genre saveGenre(Genre genre);
+    GenreDto saveGenre(GenreDto genre);
 
-    List<Genre> showAllGenres();
+    List<GenreDto> showAllGenres();
 }

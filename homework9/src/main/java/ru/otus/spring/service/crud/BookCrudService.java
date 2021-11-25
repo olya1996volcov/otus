@@ -1,19 +1,20 @@
 package ru.otus.spring.service.crud;
 
 import ru.otus.spring.domain.Book;
+import ru.otus.spring.rest.dto.BookDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BookCrudService {
 
-    Book saveBook(Book book);
+    BookDto saveBook(BookDto book);
 
-    Optional<Book> findBookById(long id);
+    BookDto findBookById(long id);
 
-    List<Book> findAllBooks();
+    List<BookDto> findAllBooks();
 
-    Book updateBookTitleById(long bookId, String newTitle);
+    BookDto updateBookTitleById(long bookId, String newTitle);
 
     void deleteBookById(long bookId);
 

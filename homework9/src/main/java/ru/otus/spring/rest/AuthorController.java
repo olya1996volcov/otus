@@ -5,12 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.spring.domain.Author;
 import ru.otus.spring.rest.dto.AuthorDto;
 import ru.otus.spring.service.crud.AuthorCrudService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,15 +17,12 @@ public class AuthorController {
 
     @PostMapping(value = "/api/author")
     public AuthorDto createNewAuthor(@RequestBody AuthorDto dto) {
-        Author author = AuthorDto.toDomainObject(dto);
-        Author savedAuthor = authorService.saveAuthor(author);
-        return AuthorDto.toDto(savedAuthor);
+        return authorService.saveAuthor(dto);
     }
 
     @GetMapping(value = "/api/author")
     public List<AuthorDto> getAllAuthors() {
-        return authorService.showAllAuthors().stream().map(AuthorDto::toDto)
-                .collect(Collectors.toList());
+        return authorService.showAllAuthors();
     }
 
 }

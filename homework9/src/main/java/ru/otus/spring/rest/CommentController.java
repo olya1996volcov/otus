@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.rest.dto.CommentDto;
 import ru.otus.spring.service.crud.CommentCrudService;
+import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +17,13 @@ public class CommentController {
 
     @PostMapping(value = "/api/book/{id}/comment")
     public void createNewComment(@PathVariable("id") long id, @RequestBody CommentDto dto) {
-        Comment comment = CommentDto.toDomainObject(dto);
-        commentService.saveByBookId(comment, id);
+        commentService.saveByBookId(dto, id);
     }
 
     @GetMapping(value = "/api/book/{id}/comment")
     public List<CommentDto> getAllCommentsByBookId(@PathVariable("id") long id) {
         return commentService.showAllCommentsByBookId(id).stream().map(
-                comment -> CommentDto.toDto(comment.getId(), comment.getText(), comment.getBook().getId()))
+                comment -> DtoDomainMapper.toDto(comment.getId(), comment.getText(), comment.getBook().getId()))
                 .collect(Collectors.toList());
     }
 
@@ -31,7 +31,7 @@ public class CommentController {
     public CommentDto geCommentById(@PathVariable("id") long id) {
         Comment comment = commentService.showCommentById(id).orElseThrow(NotFoundException::new);
 
-        return CommentDto.toDto(comment);
+        return DtoDomainMapper.toDto(comment);
     }
 
     @DeleteMapping("/api/comment/{id}")
@@ -41,6 +41,6 @@ public class CommentController {
 
     @PutMapping("/api/comment/{id}/text")
     public CommentDto updateBookTitleById(@PathVariable("id") long id, @RequestParam("text") String text) {
-        return CommentDto.toDto(commentService.updateCommentTextById(id, text));
+        return DtoDomainMapper.toDto(commentService.updateCommentTextById(id, text));
     }
 }

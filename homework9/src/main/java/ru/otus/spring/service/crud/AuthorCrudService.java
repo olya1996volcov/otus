@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AuthorCrudService {
 
-    Author saveAuthor(Author author);
+    AuthorDto saveAuthor(AuthorDto author);
 
-    List<Author> showAllAuthors();
+    List<AuthorDto> showAllAuthors();
 }

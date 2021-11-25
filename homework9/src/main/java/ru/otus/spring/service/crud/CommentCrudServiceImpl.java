@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.repository.CommentRepository;
+import ru.otus.spring.rest.dto.CommentDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class CommentCrudServiceImpl implements CommentCrudService {
 
     @Transactional
     @Override
-    public void saveByBookId(Comment comment, long bookId) {
+    public void saveByBookId(CommentDto comment, long bookId) {
           commentRepository.saveByBookId(comment.getId(), comment.getText(), bookId);
 
     }

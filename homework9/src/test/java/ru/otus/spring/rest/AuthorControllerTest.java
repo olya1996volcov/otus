@@ -12,6 +12,7 @@ import ru.otus.spring.rest.dto.AuthorDto;
 import ru.otus.spring.rest.dto.BookDto;
 import ru.otus.spring.service.crud.AuthorCrudService;
 import ru.otus.spring.service.crud.BookCrudService;
+import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AuthorControllerTest {
     void shouldReturnCorrectAuthorList() throws Exception {
 
         List<AuthorDto> expectedResult = createAuthorList().stream()
-                .map(AuthorDto::toDto).collect(Collectors.toList());
+                .map(DtoDomainMapper::toDto).collect(Collectors.toList());
 
         mvc.perform(get("/api/author"))
                 .andExpect(status().isOk())
@@ -46,7 +47,7 @@ public class AuthorControllerTest {
     @Test
     void shouldCorrectSaveNewAuthor() throws Exception {
 
-        String expectedResult = mapper.writeValueAsString(AuthorDto.toDto(createAuthor()));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(createAuthor()));
 
         mvc.perform(post("/api/author").contentType(APPLICATION_JSON)
                 .content(expectedResult))

@@ -12,12 +12,13 @@ import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Genre;
 import ru.otus.spring.rest.dto.BookDto;
 import ru.otus.spring.service.crud.BookCrudService;
+import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -39,7 +40,7 @@ public class BookControllerTest {
     void shouldReturnCorrectBookList() throws Exception {
 
         List<BookDto> expectedResult = createBookList().stream()
-                .map(BookDto::toDto).collect(Collectors.toList());
+                .map(DtoDomainMapper::toDto).collect(Collectors.toList());
 
         mvc.perform(get("/api/book"))
                 .andExpect(status().isOk())
@@ -48,7 +49,7 @@ public class BookControllerTest {
 
     @Test
     void shouldReturnCorrectBookById() throws Exception {
-        BookDto expectedResult = BookDto.toDto(createOneBook(1L));
+        BookDto expectedResult = DtoDomainMapper.toDto(createOneBook(1L));
 
         mvc.perform(get("/api/book/1"))
                 .andExpect(status().isOk())
@@ -60,8 +61,7 @@ public class BookControllerTest {
     void shouldDeleteCorrectBookById() throws Exception {
         mvc.perform(delete("/api/book/2"))
                 .andExpect(status().isOk());
-        Optional<Book> optionalBook = service.findBookById(2L);
-        assertFalse(optionalBook.isPresent());
+        assertThrows(NotFoundException.class, ()->{service.findBookById(2L);});
 
     }
 
@@ -69,7 +69,7 @@ public class BookControllerTest {
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldCorrectSaveNewBook() throws Exception {
 
-        String expectedResult = mapper.writeValueAsString(BookDto.toDto(createOneBook(3L)));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(createOneBook(3L)));
 
         mvc.perform(post("/api/book").contentType(APPLICATION_JSON)
                 .content(expectedResult))
@@ -82,7 +82,7 @@ public class BookControllerTest {
     void shouldCorrectUpdateBookTitle() throws Exception {
         Book book = createOneBook(1L);
         book.setTitle("newTitle");
-        String expectedResult = mapper.writeValueAsString(BookDto.toDto(book));
+        String expectedResult = mapper.writeValueAsString(DtoDomainMapper.toDto(book));
 
         mvc.perform(put("/api/book/{id}/title", 1).param("title", book.getTitle())
                 .content(expectedResult))
