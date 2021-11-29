@@ -17,7 +17,7 @@ public class BookController {
         return bookService.saveBook(dto);
     }
 
-    @GetMapping(value = "/api/show")
+    @GetMapping(value = "/api/book")
     public List<BookDto> getAllBooks() {
         return bookService.findAllBooks();
     }

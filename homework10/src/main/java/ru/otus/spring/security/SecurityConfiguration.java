@@ -39,9 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 // Включает Form-based аутентификацию
                 .formLogin()
-                .successForwardUrl("/show");
+                .successForwardUrl("/api/book");
 
-//                ;
     }
 
     @Bean
