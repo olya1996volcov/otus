@@ -41,10 +41,5 @@ public class DtoDomainMapper {
     public static Genre toDomainObject(GenreDto dto) {
         return new Genre(dto.getId(), dto.getGenreName());
     }
-    public static UserDto toDto(AppUser user) {
-        return new UserDto(user.getId(), user.getRole(), user.getLogin(), user.getPasswordHash(), user.getEnabled());
-    }
-    public static AppUser toDomainObject(UserDto user) {
-        return new AppUser(user.getId(), user.getRole(), user.getLogin(), user.getPassword(), user.getEnabled());
-    }
+
 }
