@@ -5,15 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 import ru.otus.spring.domain.Genre;
-import ru.otus.spring.rest.dto.BookDto;
 import ru.otus.spring.rest.dto.CommentDto;
-import ru.otus.spring.service.crud.BookCrudService;
 import ru.otus.spring.service.crud.CommentCrudService;
 import ru.otus.spring.util.DtoDomainMapper;
 
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,6 +38,12 @@ public class CommentControllerTest {
     @Autowired
     private CommentCrudService service;
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     void shouldReturnCorrectCommentListByBookId() throws Exception {
         Comment comment = createComment(1L);
@@ -51,6 +55,12 @@ public class CommentControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(expectedResult)));
     }
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     void shouldReturnCorrectCommentById() throws Exception {
         CommentDto expectedResult = DtoDomainMapper.toDto(createComment(1L));
@@ -59,6 +69,12 @@ public class CommentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(expectedResult)));
     }
+
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
 
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
@@ -70,6 +86,12 @@ public class CommentControllerTest {
 
     }
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldCorrectSaveNewComment() throws Exception {
@@ -80,6 +102,12 @@ public class CommentControllerTest {
                 .content(expectedResult))
                 .andExpect(status().isOk());
     }
+
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
 
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
@@ -105,7 +133,7 @@ public class CommentControllerTest {
                 .id(1)
                 .genreName("genre_1")
                 .build();
-      Book book = Book.builder()
+        Book book = Book.builder()
                 .id(1L).title("book_name_1").genre(genre).author(author).build();
         return Comment.builder()
                 .id(id)

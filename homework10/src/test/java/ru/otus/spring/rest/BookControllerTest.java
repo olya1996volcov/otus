@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Author;
@@ -15,10 +16,9 @@ import ru.otus.spring.service.crud.BookCrudService;
 import ru.otus.spring.util.DtoDomainMapper;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -36,6 +36,12 @@ public class BookControllerTest {
     @Autowired
     private BookCrudService service;
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     void shouldReturnCorrectBookList() throws Exception {
 
@@ -47,6 +53,12 @@ public class BookControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(expectedResult)));
     }
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     void shouldReturnCorrectBookById() throws Exception {
         BookDto expectedResult = DtoDomainMapper.toDto(createOneBook(1L));
@@ -56,14 +68,28 @@ public class BookControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(expectedResult)));
     }
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldDeleteCorrectBookById() throws Exception {
         mvc.perform(delete("/api/book/2"))
                 .andExpect(status().isOk());
-        assertThrows(NotFoundException.class, ()->{service.findBookById(2L);});
+        assertThrows(NotFoundException.class, () -> {
+            service.findBookById(2L);
+        });
 
     }
+
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
 
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
@@ -76,6 +102,12 @@ public class BookControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResult));
     }
+
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
 
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)

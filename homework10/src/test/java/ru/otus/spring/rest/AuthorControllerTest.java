@@ -5,16 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.domain.Author;
-import ru.otus.spring.domain.Book;
 import ru.otus.spring.rest.dto.AuthorDto;
-import ru.otus.spring.rest.dto.BookDto;
-import ru.otus.spring.service.crud.AuthorCrudService;
-import ru.otus.spring.service.crud.BookCrudService;
 import ru.otus.spring.util.DtoDomainMapper;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +29,12 @@ public class AuthorControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
+
     @Test
     void shouldReturnCorrectAuthorList() throws Exception {
 
@@ -44,6 +46,11 @@ public class AuthorControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(expectedResult)));
     }
 
+    @WithMockUser(
+            username = "admin",
+            password = "admin",
+            roles = "ADMIN"
+    )
     @Test
     void shouldCorrectSaveNewAuthor() throws Exception {
 
@@ -57,10 +64,10 @@ public class AuthorControllerTest {
 
     private Author createAuthor() {
         return Author.builder()
-                    .id(3L)
-                    .authorName("author_name_3")
-                    .authorSurname("author_surname_3")
-                    .build();
+                .id(3L)
+                .authorName("author_name_3")
+                .authorSurname("author_surname_3")
+                .build();
     }
 
     private List<Author> createAuthorList() {
