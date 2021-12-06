@@ -50,6 +50,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M2</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -60,7 +61,7 @@
                             <rules>
                                 <dependencyConvergence/>
                                 <requireMavenVersion>
-                                    <version>${minimal.maven.version}</version>
+                                    <version>3.3.9</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
