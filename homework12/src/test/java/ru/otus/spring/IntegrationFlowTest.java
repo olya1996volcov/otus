@@ -23,7 +23,6 @@ import static ru.otus.spring.Main.generateTechnicalTaskItem;
 
 @SpringBootTest(classes = {IntegrationConfig.class, CustomerSelector.class})
 @ComponentScan
-@IntegrationComponentScan
 @EnableIntegration
 @DisplayName("Процесс разработки должен ")
 public class IntegrationFlowTest {
