@@ -3,7 +3,7 @@ package ru.otus.spring.util;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.rest.dto.AuthorDto;
 
-public class DtoDomainAutrhorMapper {
+public class DtoDomainAuthorMapper {
 
     public static AuthorDto toDto(Author author) {
         return new AuthorDto(author.getId(), author.getAuthorName(),

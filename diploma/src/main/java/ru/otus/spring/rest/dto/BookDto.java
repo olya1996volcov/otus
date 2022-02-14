@@ -15,5 +15,4 @@ public class BookDto {
     private Genre genre;
     private boolean isFree;
 
-
 }

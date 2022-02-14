@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.repository.AuthorRepository;
 import ru.otus.spring.rest.dto.AuthorDto;
-import ru.otus.spring.util.DtoDomainAutrhorMapper;
+import ru.otus.spring.util.DtoDomainAuthorMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,14 +20,14 @@ public class AuthorCrudServiceImpl implements AuthorCrudService {
     @Transactional
     @Override
     public AuthorDto saveAuthor(AuthorDto dto) {
-        Author author = DtoDomainAutrhorMapper.toDomainObject(dto);
-        return DtoDomainAutrhorMapper.toDto(authorRepository.save(author));
+        Author author = DtoDomainAuthorMapper.toDomainObject(dto);
+        return DtoDomainAuthorMapper.toDto(authorRepository.save(author));
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<AuthorDto> showAllAuthors() {
-        return authorRepository.findAll().stream().map(DtoDomainAutrhorMapper::toDto)
+        return authorRepository.findAll().stream().map(DtoDomainAuthorMapper::toDto)
                 .collect(Collectors.toList());
     }
 }
