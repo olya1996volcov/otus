@@ -8,6 +8,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Table(name = "rented_books")
 @Entity
@@ -27,7 +28,10 @@ public class RentedBook {
     private Book book;
 
     @Fetch(FetchMode.JOIN)
-    @OneToOne(targetEntity = Genre.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "rent_date")
+    private LocalDate rentDate;
 }

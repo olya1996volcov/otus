@@ -31,14 +31,16 @@ create table users
 (
     id      bigint IDENTITY primary key,
     name    varchar(255),
-    surname varchar(255)
+    surname varchar(255),
+    role    varchar(255)
 );
 
 drop table if exists rented_books cascade;
 create table rented_books
 (
-    id      bigint IDENTITY primary key,
-    book_id bigint references books (id),
-    user_id bigint references users (id)
+    id        bigint IDENTITY primary key,
+    book_id   bigint references books (id),
+    user_id   bigint references users (id),
+    rent_date DATE
 );
 
