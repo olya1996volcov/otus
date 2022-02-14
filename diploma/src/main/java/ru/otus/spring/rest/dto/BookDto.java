@@ -13,6 +13,7 @@ public class BookDto {
     private String title;
     private Author author;
     private Genre genre;
+    private boolean isFree;
 
 
 }

@@ -9,32 +9,25 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
-@Table(name = "books")
+@Table(name = "rented_books")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Book {
+public class RentedBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "title")
-    private String title;
+    @Fetch(FetchMode.JOIN)
+    @OneToOne(targetEntity = Book.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
+    private Book book;
 
     @Fetch(FetchMode.JOIN)
-    @ManyToOne(targetEntity = Author.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
-    private Author author;
-
-    @Fetch(FetchMode.JOIN)
-    @ManyToOne(targetEntity = Genre.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "genre_id")
-    private Genre genre;
-
-    @Column(name = "is_free")
-    private boolean isFree;
-
+    @OneToOne(targetEntity = Genre.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

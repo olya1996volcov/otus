@@ -24,7 +24,7 @@ public class BookCrudHystrixProxy {
 
     public BookDto findBookByIdFallback(long id) {
         log.info("Fallback method called");
-        return new BookDto(0, "", null, null);
+        return new BookDto(0, "", null, null, true);
     }
 
 }

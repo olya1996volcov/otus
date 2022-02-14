@@ -7,23 +7,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
-@Table(name = "comments")
+@Table(name = "users")
 @Entity
-@Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+@Data
+@Builder
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "text")
-    private String text;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
-    private Book book;
+    @Column(name = "surname")
+    private String surname;
+
 }

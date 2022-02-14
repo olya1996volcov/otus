@@ -21,7 +21,7 @@ public class GenreCrudServiceImpl implements GenreCrudService {
     @Override
     public GenreDto saveGenre(GenreDto dto) {
         Genre genre = DtoDomainGenreMapper.toDomainObject(dto);
-       return DtoDomainGenreMapper.toDto(genreRepository.save(genre));
+        return DtoDomainGenreMapper.toDto(genreRepository.save(genre));
     }
 
     @Transactional(readOnly = true)
