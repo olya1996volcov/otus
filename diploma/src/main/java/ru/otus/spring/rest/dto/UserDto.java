@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CommentDto {
+public class UserDto {
+
     private long id;
-    private String text;
-    private long bookId;
+    private String login;
+    private String role;
+    private String passwordHash;
 
 }
