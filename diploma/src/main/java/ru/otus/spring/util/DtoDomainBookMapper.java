@@ -6,7 +6,7 @@ import ru.otus.spring.rest.dto.BookDto;
 public class DtoDomainBookMapper {
 
     public static Book toDomainObject(BookDto dto) {
-        return new Book(dto.getId(), dto.getTitle(), dto.getAuthor(), dto.getGenre(), true);
+        return new Book(dto.getId(), dto.getTitle(), dto.getAuthor(), dto.getGenre(), dto.isFree());
     }
 
     public static BookDto toDto(Book book) {

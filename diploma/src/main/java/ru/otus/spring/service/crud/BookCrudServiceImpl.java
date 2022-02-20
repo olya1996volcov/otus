@@ -42,15 +42,23 @@ public class BookCrudServiceImpl implements BookCrudService {
     @Transactional
     @Override
     public BookDto updateBookTitleById(long bookId, String newTitle) {
-        BookDto book = findBookById(bookId);
-        book.setTitle(newTitle);
-        Book book1 = DtoDomainBookMapper.toDomainObject(book);
-        return DtoDomainBookMapper.toDto(bookRepository.save(book1));
+        BookDto bookDto = findBookById(bookId);
+        bookDto.setTitle(newTitle);
+        Book book = DtoDomainBookMapper.toDomainObject(bookDto);
+        return DtoDomainBookMapper.toDto(bookRepository.save(book));
     }
 
     @Transactional
     @Override
     public void deleteBookById(long bookId) {
         bookRepository.deleteById(bookId);
+    }
+
+    @Override
+    public BookDto updateBookStatus(long bookId, boolean isFree) {
+        BookDto bookDto = findBookById(bookId);
+        bookDto.setFree(isFree);
+        Book book = DtoDomainBookMapper.toDomainObject(bookDto);
+        return DtoDomainBookMapper.toDto(bookRepository.save(book));
     }
 }

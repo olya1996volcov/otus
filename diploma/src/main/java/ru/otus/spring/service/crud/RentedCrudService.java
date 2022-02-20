@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RentedCrudService {
 
-    RentedBookDto saveRentedBook(RentedBookDto book);
+    RentedBookDto saveRentedBook(long bookId, long userId);
 
     List<RentedBookDto> findAllRentedBooks();
 

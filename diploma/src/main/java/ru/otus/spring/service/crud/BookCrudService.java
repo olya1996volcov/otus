@@ -16,4 +16,6 @@ public interface BookCrudService {
 
     void deleteBookById(long bookId);
 
+    BookDto updateBookStatus(long bookId, boolean isFree);
+
 }

@@ -6,4 +6,6 @@ insert into authors (id,name, surname) values (2,'author_name_2', 'author_surnam
 insert into books (id,title, genre_id, author_id, is_free) values (1,'book_name_1', 1, 1, true);
 insert into books (id,title, genre_id, author_id, is_free) values (2,'book_name_2', 1, 2, true);
 
+insert into users (id,name,surname,role) values ( 1, 'user_name', 'user_surname', 'client' );
+
 
