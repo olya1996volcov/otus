@@ -54,6 +54,7 @@ public class BookCrudServiceImpl implements BookCrudService {
         bookRepository.deleteById(bookId);
     }
 
+    @Transactional
     @Override
     public BookDto updateBookStatus(long bookId, boolean isFree) {
         BookDto bookDto = findBookById(bookId);

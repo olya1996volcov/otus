@@ -3,7 +3,6 @@ package ru.otus.spring.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.rest.dto.BookDto;
-import ru.otus.spring.service.crud.BookCrudHystrixProxy;
 import ru.otus.spring.service.crud.BookCrudService;
 
 import java.util.List;
@@ -12,8 +11,6 @@ import java.util.List;
 @RestController
 public class BookController {
     private final BookCrudService bookService;
-    private final BookCrudHystrixProxy bookCrudHystrixProxy;
-
 
     @PostMapping(value = "/api/book")
     public BookDto createNewBook(@RequestBody BookDto dto) {
@@ -27,7 +24,7 @@ public class BookController {
 
     @GetMapping("/api/book/{id}")
     public BookDto getBookById(@PathVariable("id") long id) {
-        return bookCrudHystrixProxy.findBookById(id);
+        return bookService.findBookById(id);
     }
 
     @DeleteMapping("/api/book/{id}")

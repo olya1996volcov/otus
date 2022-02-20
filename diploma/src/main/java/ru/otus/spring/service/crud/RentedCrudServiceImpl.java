@@ -26,20 +26,7 @@ public class RentedCrudServiceImpl implements RentedCrudService {
     private final BookCrudService bookService;
     private final UserCrudService userService;
 
-//    @Transactional
-//    @Override
-//    public RentedBookDto saveRentedBook(RentedBookDto dto) {
-//        RentedBook rentedBook = DtoDomainRentedBookMapper.toDomainObject(dto);
-//        BookDto bookById = bookService.findBookById(rentedBook.getBook().getId());
-//        if (!bookById.isFree()) {
-//            log.info("Book with id " + bookById.getId() + " isn't free");
-//            return null;
-//        }
-//        RentedBookDto rentedBookDto = DtoDomainRentedBookMapper.toDto(rentedBookRepository.save(rentedBook));
-//        bookService.updateBookStatus(bookById.getId(), false);
-//        return rentedBookDto;
-//    }
-
+    @Transactional
     @Override
     public RentedBookDto saveRentedBook(long bookId, long userId) {
         BookDto bookById = bookService.findBookById(bookId);
@@ -66,6 +53,7 @@ public class RentedCrudServiceImpl implements RentedCrudService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void deleteRentedBookById(long rentedBookId) {
         rentedBookRepository.deleteById(rentedBookId);

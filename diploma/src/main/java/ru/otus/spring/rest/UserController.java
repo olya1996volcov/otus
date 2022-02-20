@@ -2,10 +2,7 @@ package ru.otus.spring.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.spring.rest.dto.BookDto;
 import ru.otus.spring.rest.dto.UserDto;
-import ru.otus.spring.service.crud.BookCrudHystrixProxy;
-import ru.otus.spring.service.crud.BookCrudService;
 import ru.otus.spring.service.crud.UserCrudService;
 
 import java.util.List;
