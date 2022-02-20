@@ -58,7 +58,7 @@ class BookCrudServiceImplTest {
         int initialSize = service.findAllBooks().size();
         service.deleteBookById(2L);
         int finalSize = service.findAllBooks().size();
-        assertEquals( 1, initialSize - finalSize);
+        assertEquals(1, initialSize - finalSize);
 
     }
 

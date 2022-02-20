@@ -19,11 +19,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "login")
+    private String login;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "password_hash")
+    private String passwordHash;
 
     @Column(name = "role")
     private String role;

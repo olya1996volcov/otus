@@ -29,10 +29,10 @@ create table books
 drop table if exists users;
 create table users
 (
-    id      bigint IDENTITY primary key,
-    name    varchar(255),
-    surname varchar(255),
-    role    varchar(255)
+    id            bigint IDENTITY primary key,
+    login         varchar2(255) not null,
+    password_hash varchar2(300) not null,
+    role          varchar(255)
 );
 
 drop table if exists rented_books cascade;
